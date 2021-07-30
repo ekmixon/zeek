@@ -1,8 +1,5 @@
 # Clang-format configuration for Zeek. This configuration requires
-# clang-format 11 to work correctly.
-#
-# Documentation for clang-format 11.0 options:
-# https://releases.llvm.org/11.0.0/tools/clang/docs/ClangFormatStyleOptions.html
+# at least clang-format 12.0.1 to format correctly.
 
 Language: Cpp
 Standard: c++17
