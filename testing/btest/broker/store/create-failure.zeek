@@ -48,13 +48,13 @@ function check_it(name: string, s: opaque of Broker::Store)
 	{
 	when ( local r = Broker::keys(s) )
 		{
-		check_terminate_conditions();
 		print fmt("%s keys result: %s", name, r);
+		check_terminate_conditions();
 		}
 	timeout 1sec
 		{
-		check_terminate_conditions();
 		print fmt("%s timeout", name);
+		check_terminate_conditions();
 		}
 	}
 
