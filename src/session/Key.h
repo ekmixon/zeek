@@ -5,7 +5,8 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace zeek::session::detail {
+namespace zeek::session::detail
+	{
 
 /**
  * This type is used as the key for the map in SessionManager. It represents a
@@ -17,10 +18,10 @@ namespace zeek::session::detail {
  * the data is copied into the object so the lifetime of the key data is
  * guaranteed over the lifetime of the map entry.
  */
-class Key final {
+class Key final
+	{
 public:
-
-	const static size_t CONNECTION_KEY_TYPE=0;
+	const static size_t CONNECTION_KEY_TYPE = 0;
 
 	/**
 	 * Create a new session key from a data pointer.
@@ -35,7 +36,7 @@ public:
 	 * during construction. This defaults to false because normally the only time
 	 * data is copied into the key is when it's inserted into the session map.
 	 */
-	Key(const void* key_data, size_t size, size_t type, bool copy=false);
+	Key(const void* key_data, size_t size, size_t type, bool copy = false);
 
 	~Key();
 
@@ -63,6 +64,6 @@ private:
 	size_t size = 0;
 	size_t type = CONNECTION_KEY_TYPE;
 	bool copied = false;
-};
+	};
 
-} // namespace zeek::session::detail
+	} // namespace zeek::session::detail
