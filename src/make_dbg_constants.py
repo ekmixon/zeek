@@ -95,7 +95,7 @@ for line in inputf:
 
     fields = line.split(":", 1)
     if len(fields) != 2:
-        raise RuntimeError("Error in debug constant file on line: %s" % line)
+        raise RuntimeError(f"Error in debug constant file on line: {line}")
 
     f1, f2 = fields
     f2 = f2.strip()
@@ -114,7 +114,7 @@ for line in inputf:
     elif f1 in ("resume", "repeatable"):
         dbginfo[f1] = f2
     else:
-        raise RuntimeError("Unknown command: %s" % line)
+        raise RuntimeError(f"Unknown command: {line}")
 
 # output the last record
 outputrecord()
@@ -122,10 +122,7 @@ outputrecord()
 init_str += "\t\n}\n\n} // namespace zeek::detail\n"
 enum_str += "\tdcLast\n};\n"
 
-debugcmds = open("DebugCmdConstants.h", "w")
-debugcmds.write(enum_str)
-debugcmds.close()
-
-debugcmdinfos = open("DebugCmdInfoConstants.cc", "w")
-debugcmdinfos.write(init_str)
-debugcmdinfos.close()
+with open("DebugCmdConstants.h", "w") as debugcmds:
+    debugcmds.write(enum_str)
+with open("DebugCmdInfoConstants.cc", "w") as debugcmdinfos:
+    debugcmdinfos.write(init_str)

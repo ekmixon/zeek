@@ -34,14 +34,12 @@ with open(sys.argv[1], 'r') as f:
             if files[cur_file].get(line, 0) == 0:
                 files[cur_file][line] = count
 
-    for name in files:
+    for name, value in files.items():
 
         print('TN:')
-        print('SF:{}'.format(name))
+        print(f'SF:{name}')
 
-        das = list(files[name].keys())
-        das.sort()
-
+        das = sorted(files[name].keys())
         for da in das:
-            print('DA:{},{}'.format(da, files[name][da]))
+            print(f'DA:{da},{value[da]}')
         print('end_of_record')

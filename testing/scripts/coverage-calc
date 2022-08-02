@@ -34,8 +34,8 @@ for filename in glob.glob(inputglob):
             srclines = srclines.split()[1]
             # For sorting purposes (so that line numbers get sorted correctly),
             # construct a specially-formatted key string.
-            sortkey = filepath + ", line " + ("%6s" % srclines.split("-")[0])
-            location = filepath + ", line " + srclines
+            sortkey = f"{filepath}, line " + "%6s" % srclines.split("-")[0]
+            location = f"{filepath}, line {srclines}"
             desc = parts[2]
             # Keying by location + desc may result in duplicate data
             # as some descs change as a result of differing configurations
@@ -50,11 +50,7 @@ with open(outputfile, 'w') as f:
     for k in sorted(stats, key=lambda i: stats[i][3]):
         f.write("%s\t%s\t%s\n" % (stats[k][0], stats[k][1], stats[k][2]))
 
-num_covered = 0
-for k in stats:
-    if stats[k][0] > 0:
-        num_covered += 1
-
-if len(stats) > 0:
+num_covered = sum(v[0] > 0 for v in stats.values())
+if stats:
     print("%s/%s (%.1f%%) Zeek script statements covered." %
           (num_covered, len(stats), float(num_covered) / len(stats) * 100))
